@@ -1,0 +1,18 @@
+version: "3"
+services:
+  psql:
+    image: postgres
+    ports:
+     - "8000:8000"
+    env_file:
+      - ./configs/docker.env
+    
+    # volumes:
+      # ./db-data/:var/lib/postgresql/data/
+    
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - psql
